@@ -3,7 +3,7 @@ export function Sobre() {
     <section id="sobre" className="border-t border-divider bg-bg">
       <div className="container py-16 md:py-20">
         <div className="grid gap-10 md:grid-cols-2 md:items-start">
-          <div>
+          <div className="min-w-0">
             <h2 className="font-display text-3xl md:text-4xl">Sobre a adega</h2>
             <p className="mt-4 text-text/80">
               A UrbaBeer Empório é uma adega no bairro Urbanova, em São José dos Campos. Trabalhamos com cerveja bem

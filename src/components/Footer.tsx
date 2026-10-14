@@ -9,7 +9,7 @@ export function Footer() {
           alt="UrbaBeer Empório"
           width={132}
           height={88}
-          className="h-9 w-auto"
+          className="h-8 w-auto max-w-[120px] object-contain"
         />
         <p className="mt-4 text-sm text-text/80">{contato.endereco}</p>
         <div className="mt-3 flex flex-wrap gap-4 text-sm">

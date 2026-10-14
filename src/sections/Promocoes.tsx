@@ -9,7 +9,7 @@ export function Promocoes() {
     <section id="promocoes" className="border-t border-divider bg-bg">
       <div className="container py-16 md:py-20">
         <div className="grid gap-10 md:grid-cols-5 md:items-start">
-          <div className="md:col-span-2">
+          <div className="min-w-0 md:col-span-2">
             <img
               src="/copao-red-label.png"
               alt="Copo de bebida com gelo e garrafa de whisky ao fundo"
@@ -20,7 +20,7 @@ export function Promocoes() {
             />
           </div>
 
-          <div className="md:col-span-3">
+          <div className="min-w-0 md:col-span-3">
             <h2 className="font-display text-3xl md:text-4xl">Promoções</h2>
             <p className="mt-3 max-w-xl text-text/80">
               Valem todos os dias. A promoção de quarta vale só na quarta.

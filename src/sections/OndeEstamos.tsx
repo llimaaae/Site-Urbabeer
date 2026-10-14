@@ -44,7 +44,7 @@ export function OndeEstamos() {
                     <td className="py-2">
                       {d.abertura} – {d.fechamento}
                       {d.madrugada && (
-                        <span className="ml-2 text-xs text-text/60">(madrugada seguinte)</span>
+                        <span className="block text-xs text-text/60">(madrugada seguinte)</span>
                       )}
                     </td>
                   </tr>

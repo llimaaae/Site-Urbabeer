@@ -5,7 +5,7 @@ export function Delivery() {
     <section id="delivery" className="border-t border-divider bg-surface">
       <div className="container py-16 md:py-20">
         <div className="grid gap-8 md:grid-cols-2 md:items-center">
-          <div>
+          <div className="min-w-0">
             <h2 className="font-display text-3xl md:text-4xl">Delivery</h2>
             <p className="mt-4 text-text/80">
               Por enquanto o pedido é feito pelo WhatsApp. Envie a lista de itens e combinamos área, taxa e horário.

@@ -11,7 +11,7 @@ export function Destaques() {
 
         <ul className="mt-8 grid gap-6 md:grid-cols-2">
           {destaques.map((d) => (
-            <li key={d.nome} className="border border-divider bg-bg">
+            <li key={d.nome} className="min-w-0 border border-divider bg-bg">
               <div className="aspect-video bg-divider/40">
                 <span className="flex h-full items-center justify-center text-xs text-text/50">foto aqui</span>
               </div>

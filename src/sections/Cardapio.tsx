@@ -38,15 +38,15 @@ export function Cardapio() {
 
         <ul className="mt-8 divide-y divide-divider border-y border-divider">
           {lista.map((item) => (
-            <li key={item.nome} className="flex items-center justify-between gap-4 py-4">
-              <div>
+            <li key={item.nome} className="flex flex-wrap items-center justify-between gap-2 py-4">
+              <div className="min-w-0">
                 <p className="font-semibold">{item.nome}</p>
                 <p className="text-xs text-text/60">{item.categoria}</p>
               </div>
               <button
                 type="button"
                 onClick={() => abrirWhatsApp(`Olá! Gostaria de saber preço e disponibilidade de: ${item.nome}`)}
-                className="text-sm font-semibold text-amber hover:underline"
+                className="shrink-0 text-sm font-semibold text-amber hover:underline"
               >
                 Consulte pelo WhatsApp
               </button>
