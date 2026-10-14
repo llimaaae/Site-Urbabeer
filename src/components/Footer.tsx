@@ -7,9 +7,9 @@ export function Footer() {
         <img
           src="/logo.jpeg"
           alt="UrbaBeer Empório"
-          width={132}
-          height={88}
-          className="h-8 w-auto max-w-[120px] object-contain"
+          width={876}
+          height={475}
+          className="block h-auto w-auto max-w-[120px]"
         />
         <p className="mt-4 text-sm text-text/80">{contato.endereco}</p>
         <div className="mt-3 flex flex-wrap gap-4 text-sm">

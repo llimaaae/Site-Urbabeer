@@ -6,14 +6,14 @@ export function Header() {
 
   return (
     <header className="border-b border-divider bg-bg">
-      <div className="container flex h-16 items-center gap-4 md:h-20">
+      <div className="container flex items-center gap-3 py-2">
         <a href="#topo" className="shrink-0" aria-label="Início">
           <img
             src="/logo.jpeg"
             alt="UrbaBeer Empório"
-            width={132}
-            height={88}
-            className="h-9 w-auto max-w-[140px] object-contain md:h-11"
+            width={876}
+            height={475}
+            className="block h-10 w-auto max-w-full md:h-14"
           />
         </a>
 
