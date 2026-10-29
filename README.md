@@ -1,32 +1,61 @@
-# React + TypeScript + Vite
+# UrbaBeer Empório — site de demonstração
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Site institucional de uma página para a adega UrbaBeer Empório (Urbanova, São José dos Campos): status de abertura calculado em tempo real, promoções, cardápio e pedido pelo WhatsApp.
 
-Currently, two official plugins are available:
+> **Projeto de demonstração.** Sem vínculo oficial com o estabelecimento. A marca, a logo e as fotos pertencem à UrbaBeer; todos os itens e preços do cardápio são exemplos plausíveis, claramente marcados na página. O site não é indexado (`noindex`) por não ser o site oficial.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Deploy:** https://urbabeer.vercel.app
 
-## React Compiler
+Prints em `docs/` (desktop e mobile).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stack
 
-## Expanding the Oxlint configuration
+- React 19 + TypeScript + Vite
+- Tailwind CSS v4 (tema em `src/styles/index.css`, sem Tailwind config)
+- Oxlint, Vitest, sharp (só para converter imagens)
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Como rodar
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev      # desenvolvimento
+npm test         # testes do utilitário de horários
+npm run build    # build de produção em dist/
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Estrutura
+
+```
+src/
+  data/        # conteúdo editável: contato, promocoes, cardapio, destaques, config (DEMO)
+  sections/    # Hero, Promocoes, Destaques, Cardapio, Sobre, Delivery, OndeEstamos
+  components/  # Header, Footer, WhatsAppFloat
+  utils/       # horarios.ts (lógica de abertura), preco.ts, whatsapp.ts
+scripts/       # conversão de imagens (WebP), checagem de rolagem, prints
+```
+
+## Decisões de projeto
+
+- **Horário com janelas e madrugada**: dias podem abrir às 10h ou 12h e fechar depois da meia-noite (04h). O utilitário em `src/utils/horarios.ts` trata cada dia como janela [abertura, fechamento] e cobre a madrugada do dia seguinte; todos os cálculos usam o fuso de São Paulo, independente do fuso da máquina. Coberto por testes em `npm test`.
+- **Conteúdo editável em `src/data`**: nada de hardcode nas seções; textos e itens ficam todos em arquivos de dados.
+- **Interruptor `DEMO`** (`src/data/config.ts`): enquanto `true`, a página mostra avisos discretos de que os preços são exemplos; com `false`, os avisos somem.
+- **Mobile-first**: single column no celular, layout duplo a partir de `md:`. Nenhuma rolagem horizontal em 320–1280px (checado por `scripts/checar-rolagem.mjs`).
+- **Acessibilidade**: HTML semântico, link "pular para o conteúdo", menu mobile com `aria-expanded` e fechamento por Esc, foco visível, tabelas com `caption`.
+- **Sem libs de UI ou de animação**: todo o estilo vem do Tailwind; sem carrosséis, animações de entrada ou gradientes.
+
+## Simular horários
+
+Para ver a página em um horário específico, use o parâmetro `?agora=` (recurso só de demonstração, mantido no código):
+
+```
+http://localhost:5173/?agora=2026-10-27T03:00:00-03:00
+```
+
+Aceita qualquer string que `new Date()` aceite; a lógica converte para o fuso de São Paulo.
+
+## Aprendizados
+
+- Horários que cruzam a meia-noite quebram modelagens ingênuas de "dia + hora"; tratar cada dia como uma janela com fechamento no dia seguinte resolve, e testes de fronteira (23:59, 00:00, 04:00) pegam quase todos os erros.
+- O fuso da máquina visitante não é o fuso da loja; o utilitário precisa neutralizar o offset local antes de usar `getDay()`/`setHours()`.
+- Conteúdo de exemplo exige avisos honestos onde o dado faltando é promessa de preço: melhor marcar tudo como ilustrativo no próprio dado (`demo: true`) do que espalhar alertas soltos no layout.
+- Lighthouse em mobile prende em detalhes invisíveis no desktop: imagens fora da dobra sem `lazy`, fonte de display sem `display=swap`, mapa do Google sempre carrega.

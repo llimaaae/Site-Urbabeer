@@ -1,18 +1,27 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { contato } from '../data/contato'
 
 export function Header() {
   const [aberto, setAberto] = useState(false)
+
+  useEffect(() => {
+    if (!aberto) return
+    const aoTeclar = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setAberto(false)
+    }
+    window.addEventListener('keydown', aoTeclar)
+    return () => window.removeEventListener('keydown', aoTeclar)
+  }, [aberto])
 
   return (
     <header className="border-b border-divider bg-bg">
       <div className="container box-border flex min-w-0 items-center gap-3 py-2">
         <a href="#topo" className="shrink-0" aria-label="Início">
           <img
-            src="/logo.jpeg"
+            src="/logo.webp"
             alt="UrbaBeer Empório"
-            width={876}
-            height={475}
+            width={1072}
+            height={712}
             className="block h-[56px] w-auto min-w-0 max-w-full md:h-[72px]"
           />
         </a>

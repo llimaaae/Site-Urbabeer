@@ -1,0 +1,3 @@
+# Projeto de demonstração: site sem indexação.
+User-agent: *
+Disallow: /

@@ -15,12 +15,12 @@ export function Sobre() {
             </p>
           </div>
           <img
-            src="/geladeira.png"
+            src="/geladeira.webp"
             alt="Geladeiras com cervejas e bebidas, com garrafa grande de whisky em primeiro plano"
             width={896}
             height={758}
             loading="lazy"
-            className="w-full"
+            className="w-full border border-divider"
           />
         </div>
       </div>

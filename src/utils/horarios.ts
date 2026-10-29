@@ -22,8 +22,12 @@ export type StatusHorario = {
   diaDoExpediente: DiaSemana
 }
 
+// Desloca a instância para que os getters locais (getDay, setHours) leiam a hora
+// de parede de São Paulo, independente do fuso da máquina que executa o código.
 function paraSP(agora: Date): Date {
-  return new Date(agora.getTime() + OFFSET_SP_MS)
+  const tzMin = -agora.getTimezoneOffset() // ex.: -180 no horário de SP, 0 em UTC
+  const shiftMs = OFFSET_SP_MS - tzMin * 60_000
+  return new Date(agora.getTime() + shiftMs)
 }
 
 function inicioDoDia(data: Date): Date {
@@ -37,6 +41,10 @@ function formatarMinutos(min: number): string {
   const h = Math.floor(m / 60)
   const r = m % 60
   return `${String(h).padStart(2, '0')}:${String(r).padStart(2, '0')}`
+}
+
+export function diaSemanaSP(agora: Date): DiaSemana {
+  return DIAS[paraSP(agora).getDay()]
 }
 
 export function obterStatusAgora(agora: Date): StatusHorario {
@@ -59,7 +67,7 @@ export function obterStatusAgora(agora: Date): StatusHorario {
     if (agoraMs >= inicio && agoraMs < fim) {
       return {
         aberto: true,
-        fechaAs: formatarMinutos(agenda.fechamento < agenda.abertura ? agenda.fechamento : agenda.fechamento),
+        fechaAs: formatarMinutos(agenda.fechamento),
         abreAs: formatarMinutos(agenda.abertura),
         diaDoExpediente: DIAS[c.dia],
       }
@@ -73,4 +81,8 @@ export function obterStatusAgora(agora: Date): StatusHorario {
     abreAs: formatarMinutos(agendaHoje.abertura),
     diaDoExpediente: DIAS[hoje0.getDay()],
   }
+}
+
+export function mensagemDeStatus(status: StatusHorario): string {
+  return status.aberto ? `Aberto até ${status.fechaAs}` : `Fechado. Abre hoje às ${status.abreAs}`
 }

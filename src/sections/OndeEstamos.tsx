@@ -1,21 +1,20 @@
 import { contato } from '../data/contato'
+import { diaSemanaSP } from '../utils/horarios'
 
 const DIAS = [
-  { nome: 'Domingo', idx: 0, abertura: '10:00', fechamento: '00:00', madrugada: false },
   { nome: 'Segunda', idx: 1, abertura: '12:00', fechamento: '00:00', madrugada: false },
   { nome: 'Terça', idx: 2, abertura: '12:00', fechamento: '04:00', madrugada: true },
   { nome: 'Quarta', idx: 3, abertura: '12:00', fechamento: '04:00', madrugada: true },
   { nome: 'Quinta', idx: 4, abertura: '10:00', fechamento: '04:00', madrugada: true },
   { nome: 'Sexta', idx: 5, abertura: '10:00', fechamento: '04:00', madrugada: true },
   { nome: 'Sábado', idx: 6, abertura: '10:00', fechamento: '04:00', madrugada: true },
+  { nome: 'Domingo', idx: 0, abertura: '10:00', fechamento: '00:00', madrugada: false },
 ]
 
-function diaAtualSP(): number {
-  return new Date(new Date().getTime() - 3 * 60 * 60 * 1000).getDay()
-}
+// Dia de hoje em São Paulo, fixo no carregamento da página (evita Date impuro no render).
+const HOJE_SP = diaSemanaSP(new Date())
 
 export function OndeEstamos() {
-  const hoje = diaAtualSP()
   const mapaSrc = `https://www.google.com/maps?q=${encodeURIComponent(contato.endereco)}&output=embed`
 
   return (
@@ -25,7 +24,7 @@ export function OndeEstamos() {
         <p className="mt-3 text-text/80">{contato.endereco}</p>
 
         <img
-          src="/fachada.png"
+          src="/fachada.webp"
           alt="Fachada da UrbaBeer Empório com letreiro preto e mesas com guarda-sóis"
           width={1160}
           height={586}
@@ -39,8 +38,17 @@ export function OndeEstamos() {
               <caption className="sr-only">Horário de funcionamento</caption>
               <tbody>
                 {DIAS.map((d) => (
-                  <tr key={d.nome} className={d.idx === hoje ? 'bg-surface' : ''}>
-                    <td className="py-2 pr-4 font-semibold">{d.nome}</td>
+                  <tr
+                    key={d.nome}
+                    className={d.nome.toLowerCase() === HOJE_SP ? 'bg-surface' : ''}
+                    aria-current={d.nome.toLowerCase() === HOJE_SP ? 'date' : undefined}
+                  >
+                    <td className="py-2 pr-4 font-semibold">
+                      {d.nome}
+                      {d.nome.toLowerCase() === HOJE_SP && (
+                        <span className="ml-2 text-xs font-bold text-amber">hoje</span>
+                      )}
+                    </td>
                     <td className="py-2">
                       {d.abertura} – {d.fechamento}
                       {d.madrugada && (

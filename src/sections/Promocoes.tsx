@@ -11,12 +11,12 @@ export function Promocoes() {
         <div className="grid gap-10 md:grid-cols-5 md:items-start">
           <div className="min-w-0 md:col-span-2">
             <img
-              src="/copao-red-label.png"
+              src="/copao-red-label.webp"
               alt="Copo de bebida com gelo e garrafa de whisky ao fundo"
               width={722}
               height={933}
               loading="lazy"
-              className="w-full"
+              className="w-full border border-divider"
             />
           </div>
 
@@ -33,7 +33,7 @@ export function Promocoes() {
                     <p className="text-lg font-semibold">{p.titulo}</p>
                     <p className="text-sm text-text/70">{p.condicao}</p>
                   </div>
-                  <p className="shrink-0 font-display text-3xl text-amber md:text-4xl">{p.preco}</p>
+                  <p className="shrink-0 font-display text-2xl text-amber sm:text-3xl md:text-4xl">{p.preco}</p>
                 </li>
               ))}
             </ul>
@@ -43,7 +43,7 @@ export function Promocoes() {
                 <p className="text-xs font-semibold uppercase tracking-wide text-amber">Quarta-feira</p>
                 <div className="mt-2 flex items-baseline justify-between gap-4">
                   <p className="text-xl font-semibold">{master.titulo}</p>
-                  <p className="font-display text-4xl text-amber">{master.preco}</p>
+                  <p className="font-display text-wrap text-3xl text-amber sm:text-4xl">{master.preco}</p>
                 </div>
                 <p className="mt-1 text-sm text-text/70">{master.condicao}</p>
                 <a
