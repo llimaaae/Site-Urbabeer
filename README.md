@@ -6,7 +6,13 @@ Site institucional de uma página para a adega UrbaBeer Empório (Urbanova, São
 
 **Deploy:** https://urbabeer.vercel.app
 
-Prints em `docs/` (desktop e mobile).
+## Demonstração
+
+![Versão desktop do site](docs/desktop.png)
+
+<p align="center">
+  <img src="docs/mobile.png" alt="Versão mobile do site" width="320" />
+</p>
 
 ## Stack
 
@@ -23,6 +29,16 @@ npm test         # testes do utilitário de horários
 npm run build    # build de produção em dist/
 ```
 
+## Simular horários
+
+Para ver a página em um horário específico, use o parâmetro `?agora=` (recurso só de demonstração, mantido no código):
+
+```
+http://localhost:5173/?agora=2026-10-27T03:00:00-03:00
+```
+
+Aceita qualquer string que `new Date()` aceite; a lógica converte para o fuso de São Paulo.
+
 ## Estrutura
 
 ```
@@ -31,7 +47,7 @@ src/
   sections/    # Hero, Promocoes, Destaques, Cardapio, Sobre, Delivery, OndeEstamos
   components/  # Header, Footer, WhatsAppFloat
   utils/       # horarios.ts (lógica de abertura), preco.ts, whatsapp.ts
-scripts/       # conversão de imagens (WebP), checagem de rolagem, prints
+scripts/       # checagem de rolagem horizontal e geração dos prints de docs/
 ```
 
 ## Decisões de projeto
@@ -43,15 +59,18 @@ scripts/       # conversão de imagens (WebP), checagem de rolagem, prints
 - **Acessibilidade**: HTML semântico, link "pular para o conteúdo", menu mobile com `aria-expanded` e fechamento por Esc, foco visível, tabelas com `caption`.
 - **Sem libs de UI ou de animação**: todo o estilo vem do Tailwind; sem carrosséis, animações de entrada ou gradientes.
 
-## Simular horários
+## Qualidade
 
-Para ver a página em um horário específico, use o parâmetro `?agora=` (recurso só de demonstração, mantido no código):
+Lighthouse em mobile no build de produção:
 
-```
-http://localhost:5173/?agora=2026-10-27T03:00:00-03:00
-```
+| Métrica           | Nota |
+| ----------------- | ---- |
+| Performance       | 90   |
+| Acessibilidade    | 100  |
+| Boas práticas     | 100  |
+| SEO               | 69\*  |
 
-Aceita qualquer string que `new Date()` aceite; a lógica converte para o fuso de São Paulo.
+\* O único item que falha é `is-crawlable`, consequência deliberada do `noindex` do projeto de demonstração. Report completo em `docs/lighthouse.report.json`.
 
 ## Aprendizados
 
