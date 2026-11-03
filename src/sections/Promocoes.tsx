@@ -1,61 +1,70 @@
-import { contato } from '../data/contato'
 import { promocoes } from '../data/promocoes'
+import { abrirWhatsApp } from '../utils/whatsapp'
 
 export function Promocoes() {
   const master = promocoes.find((p) => p.destaque)
   const gins = promocoes.filter((p) => !p.destaque)
 
   return (
-    <section id="promocoes" className="border-t border-divider bg-bg">
-      <div className="container py-16 md:py-20">
+    <section id="promocoes" className="border-t border-divider bg-bg py-16 md:py-24" aria-labelledby="promocoes-title">
+      <div className="container">
         <div className="grid gap-10 md:grid-cols-5 md:items-start">
-          <div className="min-w-0 md:col-span-2">
-            <img
-              src="/copao-red-label.webp"
-              alt="Copo de bebida com gelo e garrafa de whisky ao fundo"
-              width={722}
-              height={933}
-              loading="lazy"
-              className="w-full border border-divider"
-            />
+          <div className="min-w-0 md:col-span-2 animate-slide-up">
+            <div className="aspect-[3/4] overflow-hidden rounded-xl border border-divider bg-surface">
+              <img
+                src="/copao-red-label.webp"
+                alt="Copo de bebida com gelo e garrafa de whisky ao fundo, foto real do empório"
+                width={722}
+                height={933}
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02]"
+              />
+            </div>
           </div>
 
-          <div className="min-w-0 md:col-span-3">
-            <h2 className="font-display text-3xl md:text-4xl">Promoções</h2>
-            <p className="mt-3 max-w-xl text-text/80">
-              Valem todos os dias. A promoção de quarta vale só na quarta.
-            </p>
+          <div className="min-w-0 md:col-span-3 animate-slide-up" style={{ animationDelay: '100ms' }}>
+            <header className="mb-6">
+              <h2 id="promocoes-title" className="font-display text-3xl md:text-4xl">Promoções</h2>
+              <p className="mt-3 max-w-xl text-text/70">
+                Valem todos os dias. A promoção de quarta vale só na quarta.
+              </p>
+            </header>
 
-            <ul className="mt-8 divide-y divide-divider border-y border-divider">
-              {gins.map((p) => (
-                <li key={p.titulo} className="flex items-center justify-between gap-4 py-5">
-                  <div>
-                    <p className="text-lg font-semibold">{p.titulo}</p>
-                    <p className="text-sm text-text/70">{p.condicao}</p>
+            <div className="rounded-xl border border-divider bg-surface overflow-hidden">
+              <ul className="divide-y divide-divider">
+                {gins.map((p, index) => (
+                  <li
+                    key={p.titulo}
+                    className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 py-5 px-6 transition-colors duration-150 hover:bg-surface-elevated"
+                    style={{ animationDelay: `${200 + index * 50}ms` }}
+                  >
+                    <div className="min-w-0">
+                      <p className="text-lg font-semibold text-text">{p.titulo}</p>
+                      <p className="text-sm text-text/60">{p.condicao}</p>
+                    </div>
+                    <p className="shrink-0 font-display text-2xl sm:text-3xl md:text-4xl text-amber tabular-nums">{p.preco}</p>
+                  </li>
+                ))}
+              </ul>
+
+              {master && (
+                <div className="border-t border-amber p-6 bg-amber/5">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-amber">Quarta-feira especial</p>
+                  <div className="mt-3 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-4">
+                    <p className="text-xl font-semibold text-text">{master.titulo}</p>
+                    <p className="font-display text-wrap text-3xl sm:text-4xl text-amber tabular-nums">{master.preco}</p>
                   </div>
-                  <p className="shrink-0 font-display text-2xl text-amber sm:text-3xl md:text-4xl">{p.preco}</p>
-                </li>
-              ))}
-            </ul>
-
-            {master && (
-              <div className="mt-6 border border-amber p-5">
-                <p className="text-xs font-semibold uppercase tracking-wide text-amber">Quarta-feira</p>
-                <div className="mt-2 flex items-baseline justify-between gap-4">
-                  <p className="text-xl font-semibold">{master.titulo}</p>
-                  <p className="font-display text-wrap text-3xl text-amber sm:text-4xl">{master.preco}</p>
+                  <p className="mt-2 text-sm text-text/70">{master.condicao}</p>
+                  <button
+                    type="button"
+                    onClick={() => abrirWhatsApp(`Olá! Quero aproveitar a promoção de quarta: ${master.titulo}`)}
+                    className="mt-4 btn btn-primary btn-sm"
+                  >
+                    Chamar no WhatsApp
+                  </button>
                 </div>
-                <p className="mt-1 text-sm text-text/70">{master.condicao}</p>
-                <a
-                  href={contato.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-4 inline-block text-sm font-semibold text-text hover:underline"
-                >
-                  Chamar no WhatsApp
-                </a>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
