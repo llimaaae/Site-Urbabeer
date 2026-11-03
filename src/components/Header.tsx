@@ -6,7 +6,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
+    const onScroll = () => setScrolled(window.scrollY > 16)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -22,34 +22,34 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-[var(--z-sticky)] bg-bg/95 backdrop-blur-sm border-b border-divider transition-all duration-200 ${
-        scrolled ? 'shadow-lg-dark' : ''
+      className={`fixed top-0 left-0 right-0 z-[var(--z-sticky)] bg-bg/80 backdrop-blur-md border-b border-divider transition-all duration-300 ${
+        scrolled ? 'shadow-lg' : ''
       }`}
       role="banner"
     >
-      <div className="container box-border flex min-w-0 items-center gap-3 py-3">
+      <div className="container box-border flex min-w-0 items-center gap-4 py-3 md:py-4">
         <a href="#topo" className="shrink-0" aria-label="UrbaBeer Empório - Início">
           <img
             src="/logo.webp"
             alt=""
             width={1072}
             height={712}
-            className="block h-[48px] w-auto min-w-0 max-w-full md:h-[60px]"
+            className="block h-[44px] w-auto min-w-0 max-w-full md:h-[56px]"
             aria-hidden="true"
           />
         </a>
 
-        <nav className="hidden flex-1 items-center gap-1 md:flex" aria-label="Navegação principal">
-          <a href="#promocoes" className="px-3 py-2 text-sm font-semibold text-text/90 hover:text-amber transition-colors duration-150 rounded-md">
+        <nav className="hidden flex-1 items-center justify-center gap-1 md:flex" aria-label="Navegação principal">
+          <a href="#promocoes" className="px-3 py-2 text-sm font-semibold text-text/80 hover:text-amber transition-colors duration-200 rounded-lg">
             Promoções
           </a>
-          <a href="#cardapio" className="px-3 py-2 text-sm font-semibold text-text/90 hover:text-amber transition-colors duration-150 rounded-md">
+          <a href="#cardapio" className="px-3 py-2 text-sm font-semibold text-text/80 hover:text-amber transition-colors duration-200 rounded-lg">
             Cardápio
           </a>
-          <a href="#sobre" className="px-3 py-2 text-sm font-semibold text-text/90 hover:text-amber transition-colors duration-150 rounded-md">
+          <a href="#sobre" className="px-3 py-2 text-sm font-semibold text-text/80 hover:text-amber transition-colors duration-200 rounded-lg">
             Sobre
           </a>
-          <a href="#onde" className="px-3 py-2 text-sm font-semibold text-text/90 hover:text-amber transition-colors duration-150 rounded-md">
+          <a href="#onde" className="px-3 py-2 text-sm font-semibold text-text/80 hover:text-amber transition-colors duration-200 rounded-lg">
             Onde estamos
           </a>
         </nav>
@@ -59,7 +59,7 @@ export function Header() {
             href={contato.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden h-10 w-10 items-center justify-center text-text/90 hover:text-amber hover:bg-surface-elevated rounded-full transition-all duration-150 md:inline-flex"
+            className="hidden h-10 w-10 items-center justify-center text-text/70 hover:text-amber hover:bg-bg-alt rounded-full transition-all duration-200 md:inline-flex"
             aria-label="Instagram da UrbaBeer"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -78,7 +78,7 @@ export function Header() {
           </a>
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center text-text/90 hover:text-amber hover:bg-surface-elevated rounded-full transition-all duration-150 md:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center text-text/70 hover:text-amber hover:bg-bg-alt rounded-full transition-all duration-200 md:hidden"
             aria-expanded={aberto}
             aria-controls="menu-mobile"
             aria-label={aberto ? 'Fechar menu' : 'Abrir menu'}
@@ -93,24 +93,24 @@ export function Header() {
 
       {aberto && (
         <nav id="menu-mobile" className="border-t border-divider bg-bg md:hidden animate-slide-down" aria-label="Navegação principal">
-          <div className="container flex flex-col gap-1 py-3">
-            <a href="#promocoes" className="px-3 py-2 text-sm font-semibold text-text/90 hover:text-amber hover:bg-surface-elevated rounded-md transition-colors duration-150" onClick={() => setAberto(false)}>
+          <div className="container flex flex-col gap-1 py-4">
+            <a href="#promocoes" className="px-4 py-3 text-sm font-semibold text-text/80 hover:text-amber hover:bg-bg-alt rounded-lg transition-colors duration-200" onClick={() => setAberto(false)}>
               Promoções
             </a>
-            <a href="#cardapio" className="px-3 py-2 text-sm font-semibold text-text/90 hover:text-amber hover:bg-surface-elevated rounded-md transition-colors duration-150" onClick={() => setAberto(false)}>
+            <a href="#cardapio" className="px-4 py-3 text-sm font-semibold text-text/80 hover:text-amber hover:bg-bg-alt rounded-lg transition-colors duration-200" onClick={() => setAberto(false)}>
               Cardápio
             </a>
-            <a href="#sobre" className="px-3 py-2 text-sm font-semibold text-text/90 hover:text-amber hover:bg-surface-elevated rounded-md transition-colors duration-150" onClick={() => setAberto(false)}>
+            <a href="#sobre" className="px-4 py-3 text-sm font-semibold text-text/80 hover:text-amber hover:bg-bg-alt rounded-lg transition-colors duration-200" onClick={() => setAberto(false)}>
               Sobre
             </a>
-            <a href="#onde" className="px-3 py-2 text-sm font-semibold text-text/90 hover:text-amber hover:bg-surface-elevated rounded-md transition-colors duration-150" onClick={() => setAberto(false)}>
+            <a href="#onde" className="px-4 py-3 text-sm font-semibold text-text/80 hover:text-amber hover:bg-bg-alt rounded-lg transition-colors duration-200" onClick={() => setAberto(false)}>
               Onde estamos
             </a>
             <a
               href={contato.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-2 text-sm font-semibold text-text/90 hover:text-amber hover:bg-surface-elevated rounded-md transition-colors duration-150"
+              className="px-4 py-3 text-sm font-semibold text-text/80 hover:text-amber hover:bg-bg-alt rounded-lg transition-colors duration-200"
             >
               Instagram
             </a>
@@ -118,7 +118,7 @@ export function Header() {
               href={contato.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-1 btn btn-primary btn-sm text-center"
+              className="mt-2 btn btn-primary btn-md text-center"
             >
               WhatsApp
             </a>

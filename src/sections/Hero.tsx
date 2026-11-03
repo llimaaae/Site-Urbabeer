@@ -22,32 +22,32 @@ export function Hero() {
   }, [agoraParam])
 
   return (
-    <section id="topo" className="relative border-b border-divider bg-bg pt-20 pb-16 md:pt-32 md:pb-24" aria-labelledby="hero-title">
-      <div className="container grid gap-10 md:grid-cols-2 md:gap-16 md:items-center">
-        <div className="max-w-xl animate-slide-up" style={{ animationDelay: '100ms' }}>
+    <section id="topo" className="relative border-b border-divider bg-bg pt-28 pb-16 md:pt-36 md:pb-24 lg:pt-40 lg:pb-28" aria-labelledby="hero-title">
+      <div className="container grid gap-10 md:grid-cols-2 md:gap-16 lg:gap-20 md:items-center">
+        <div className="max-w-xl animate-slide-up">
           <p className="text-xs font-semibold uppercase tracking-widest text-amber">{contato.slogan}</p>
-          <h1 id="hero-title" className="mt-3 font-display text-5xl md:text-6xl lg:text-7xl text-text leading-[1.05]">
+          <h1 id="hero-title" className="mt-3 font-display text-5xl md:text-6xl lg:text-7xl text-text leading-[1.02] text-balance">
             UrbaBeer Empório
           </h1>
-          <p className="mt-5 text-lg text-text/80 leading-relaxed">
+          <p className="mt-5 text-lg text-text/70 leading-relaxed text-pretty">
             Adega no Urbanova. Cerveja bem gelada, promoções todos os dias e atendimento até de madrugada.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3" role="status" aria-live="polite">
             <span
-              className={`inline-flex items-center gap-2 px-3 py-1.5 text-sm font-semibold rounded-full border transition-colors duration-150 ${
+              className={`inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-full border transition-all duration-200 ${
                 status.aberto
-                  ? 'border-amber bg-amber/10 text-amber'
-                  : 'border-red bg-red/10 text-red'
+                  ? 'border-green/30 bg-green/10 text-green'
+                  : 'border-red/30 bg-red/10 text-red'
               }`}
             >
               <span className="relative flex h-2 w-2" aria-hidden="true">
                 <span
                   className={`absolute inset-0 rounded-full ${
-                    status.aberto ? 'bg-amber animate-pulse' : 'bg-red'
+                    status.aberto ? 'bg-green animate-pulse-soft' : 'bg-red'
                   }`}
                 />
-                <span className={`relative block h-full w-full rounded-full bg-current opacity-50`} />
+                <span className={`relative block h-full w-full rounded-full bg-current/50`} />
               </span>
               {mensagemDeStatus(status)}
             </span>
@@ -70,23 +70,23 @@ export function Hero() {
             </a>
           </div>
 
-          <p className="mt-8 text-xs text-text/60">Venda proibida para menores de 18 anos.</p>
+          <p className="mt-8 text-xs text-text-subtle">Venda proibida para menores de 18 anos.</p>
         </div>
 
-        <div className="relative animate-fade-in" style={{ animationDelay: '300ms', animationDuration: '600ms' }}>
-          <div className="aspect-[4/3] overflow-hidden rounded-xl border border-divider bg-surface">
+        <div className="relative animate-fade-in" style={{ animationDelay: '300ms', animationDuration: '700ms' }}>
+          <div className="aspect-[4/3] overflow-hidden rounded-2xl border border-divider bg-surface shadow-xl">
             <img
               src="/geladeira.webp"
               alt="Geladeiras com cervejas e bebidas geladas na adega UrbaBeer"
               width={896}
               height={758}
               fetchPriority="high"
-              className="w-full h-full object-cover transition-transform duration-700 hover:scale-[1.02]"
+              className="w-full h-full object-cover transition-transform duration-1000 hover:scale-[1.03]"
             />
           </div>
-          <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-amber text-black px-4 py-3 rounded-xl shadow-xl animate-slide-up" style={{ animationDelay: '400ms' }}>
-            <p className="font-display text-xl">Gelada</p>
-            <p className="text-xs font-semibold uppercase tracking-wide">na hora</p>
+          <div className="absolute -bottom-5 -right-5 md:-bottom-8 md:-right-8 bg-white/95 backdrop-blur-sm text-text px-5 py-4 rounded-2xl shadow-xl animate-slide-up border border-divider/50" style={{ animationDelay: '400ms' }}>
+            <p className="font-display text-xl text-amber">Gelada na hora</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Sempre na temperatura ideal</p>
           </div>
         </div>
       </div>

@@ -12,18 +12,18 @@ export function Cardapio() {
   const lista = filtro === 'Todas' ? cardapio : cardapio.filter((i) => i.categoria === filtro)
 
   return (
-    <section id="cardapio" className="border-t border-divider bg-bg py-16 md:py-24" aria-labelledby="cardapio-title">
+    <section id="cardapio" className="border-t border-divider bg-bg py-16 md:py-24 lg:py-28" aria-labelledby="cardapio-title">
       <div className="container">
         <header className="animate-slide-up">
           <h2 id="cardapio-title" className="font-display text-3xl md:text-4xl">Cardápio</h2>
           {DEMO && (
-            <p className="mt-3 max-w-xl text-sm text-text/60">
+            <p className="mt-3 max-w-xl text-sm text-text-muted">
               Preços e itens ilustrativos, apenas para demonstração do projeto.
             </p>
           )}
         </header>
 
-        <div className="mt-6 flex flex-wrap gap-2" role="tablist" aria-label="Categorias do cardápio">
+        <div className="mt-8 flex flex-wrap gap-2" role="tablist" aria-label="Categorias do cardápio">
           {(['Todas', ...categorias] as Filtro[]).map((c) => (
             <button
               key={c}
@@ -31,7 +31,7 @@ export function Cardapio() {
               role="tab"
               aria-selected={filtro === c}
               onClick={() => setFiltro(c)}
-              className={`btn transition-all duration-150 ${
+              className={`btn transition-all duration-200 ${
                 filtro === c ? 'btn-primary' : 'btn-secondary'
               }`}
             >
@@ -41,17 +41,17 @@ export function Cardapio() {
         </div>
 
         <div className="mt-8 animate-fade-in" style={{ animationDelay: '100ms' }}>
-          <div className="rounded-xl border border-divider bg-surface overflow-hidden">
-            <ul className="divide-y divide-divider" role="list">
+          <div className="rounded-2xl border border-divider bg-surface overflow-hidden shadow-md">
+            <ul className="divide-y divide-divider/50" role="list">
               {lista.map((item, index) => (
                 <li
                   key={`${item.categoria}-${item.nome}`}
-                  className="flex min-w-0 items-center gap-4 px-5 py-4 transition-colors duration-150 hover:bg-surface-elevated"
+                  className="flex min-w-0 items-center gap-4 px-5 py-4 transition-all duration-200 hover:bg-bg-alt"
                   style={{ animationDelay: `${index * 20}ms` }}
                 >
                   <div className="min-w-0 grow">
                     <p className="font-semibold text-text truncate">{item.nome}</p>
-                    <p className="text-xs text-text/50">{item.categoria}</p>
+                    <p className="text-xs text-text-muted">{item.categoria}</p>
                   </div>
                   <button
                     type="button"
@@ -64,7 +64,7 @@ export function Cardapio() {
                 </li>
               ))}
               {lista.length === 0 && (
-                <li className="px-5 py-8 text-center text-text/50">
+                <li className="px-5 py-10 text-center text-text-muted">
                   Nenhum item nesta categoria.
                 </li>
               )}

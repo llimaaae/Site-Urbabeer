@@ -2,15 +2,15 @@ import { abrirWhatsApp } from '../utils/whatsapp'
 
 export function Delivery() {
   return (
-    <section id="delivery" className="border-t border-divider bg-surface py-16 md:py-24" aria-labelledby="delivery-title">
+    <section id="delivery" className="border-t border-divider bg-bg-alt py-16 md:py-24 lg:py-28" aria-labelledby="delivery-title">
       <div className="container">
-        <div className="grid gap-8 md:grid-cols-2 md:items-center">
+        <div className="grid gap-10 md:grid-cols-2 md:items-center lg:gap-16">
           <div className="min-w-0 animate-slide-up">
             <h2 id="delivery-title" className="font-display text-3xl md:text-4xl">Delivery</h2>
-            <p className="mt-4 text-text/80 leading-relaxed">
+            <p className="mt-4 text-text/70 leading-relaxed text-pretty">
               Por enquanto o pedido é feito pelo WhatsApp. Envie a lista de itens e combinamos área, taxa e horário.
             </p>
-            <p className="mt-2 text-sm text-text/60">Consulte área e taxa pelo WhatsApp.</p>
+            <p className="mt-2 text-sm text-text-muted">Consulte área e taxa pelo WhatsApp.</p>
             <button
               type="button"
               onClick={() => abrirWhatsApp('Olá! Gostaria de fazer um pedido.')}
@@ -24,9 +24,9 @@ export function Delivery() {
             </button>
           </div>
           <div className="animate-fade-in" style={{ animationDelay: '200ms' }}>
-            <div className="rounded-xl border border-divider bg-bg p-6 md:p-8">
+            <div className="rounded-2xl border border-divider bg-surface p-6 md:p-8 shadow-md">
               <div className="flex items-start gap-4">
-                <div className="shrink-0 flex h-12 w-12 items-center justify-center rounded-lg bg-amber/10 text-amber" aria-hidden="true">
+                <div className="shrink-0 flex h-12 w-12 items-center justify-center rounded-xl bg-amber/10 text-amber" aria-hidden="true">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" />
@@ -34,13 +34,13 @@ export function Delivery() {
                 </div>
                 <div>
                   <h3 className="font-display text-xl text-text">Sem burocracia</h3>
-                  <p className="mt-2 text-text/80">
+                  <p className="mt-2 text-text/70 leading-relaxed">
                     Pagamento e entrega combinados na conversa. Sem cadastro, sem carrinho, direto com a gente.
                   </p>
                 </div>
               </div>
               <div className="mt-6 flex items-start gap-4">
-                <div className="shrink-0 flex h-12 w-12 items-center justify-center rounded-lg bg-amber/10 text-amber" aria-hidden="true">
+                <div className="shrink-0 flex h-12 w-12 items-center justify-center rounded-xl bg-amber/10 text-amber" aria-hidden="true">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                     <circle cx="12" cy="10" r="3" />
@@ -48,7 +48,7 @@ export function Delivery() {
                 </div>
                 <div>
                   <h3 className="font-display text-xl text-text">Até de madrugada</h3>
-                  <p className="mt-2 text-text/80">
+                  <p className="mt-2 text-text/70 leading-relaxed">
                     Entregamos nos dias de funcionamento estendido. Confira o horário na seção "Onde estamos".
                   </p>
                 </div>
