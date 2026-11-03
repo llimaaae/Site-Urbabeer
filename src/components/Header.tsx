@@ -3,6 +3,13 @@ import { contato } from '../data/contato'
 
 export function Header() {
   const [aberto, setAberto] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   useEffect(() => {
     if (!aberto) return
@@ -14,39 +21,45 @@ export function Header() {
   }, [aberto])
 
   return (
-    <header className="border-b border-divider bg-bg">
-      <div className="container box-border flex min-w-0 items-center gap-3 py-2">
-        <a href="#topo" className="shrink-0" aria-label="Início">
+    <header
+      className={`fixed top-0 left-0 right-0 z-[var(--z-sticky)] bg-bg/95 backdrop-blur-sm border-b border-divider transition-all duration-200 ${
+        scrolled ? 'shadow-lg-dark' : ''
+      }`}
+      role="banner"
+    >
+      <div className="container box-border flex min-w-0 items-center gap-3 py-3">
+        <a href="#topo" className="shrink-0" aria-label="UrbaBeer Empório - Início">
           <img
             src="/logo.webp"
-            alt="UrbaBeer Empório"
+            alt=""
             width={1072}
             height={712}
-            className="block h-[56px] w-auto min-w-0 max-w-full md:h-[72px]"
+            className="block h-[48px] w-auto min-w-0 max-w-full md:h-[60px]"
+            aria-hidden="true"
           />
         </a>
 
-        <nav className="hidden flex-1 items-center gap-6 pl-4 md:flex" aria-label="Principal">
-          <a href="#promocoes" className="text-sm font-semibold text-text hover:underline">
+        <nav className="hidden flex-1 items-center gap-1 md:flex" aria-label="Navegação principal">
+          <a href="#promocoes" className="px-3 py-2 text-sm font-semibold text-text/90 hover:text-amber transition-colors duration-150 rounded-md">
             Promoções
           </a>
-          <a href="#cardapio" className="text-sm font-semibold text-text hover:underline">
+          <a href="#cardapio" className="px-3 py-2 text-sm font-semibold text-text/90 hover:text-amber transition-colors duration-150 rounded-md">
             Cardápio
           </a>
-          <a href="#sobre" className="text-sm font-semibold text-text hover:underline">
+          <a href="#sobre" className="px-3 py-2 text-sm font-semibold text-text/90 hover:text-amber transition-colors duration-150 rounded-md">
             Sobre
           </a>
-          <a href="#onde" className="text-sm font-semibold text-text hover:underline">
+          <a href="#onde" className="px-3 py-2 text-sm font-semibold text-text/90 hover:text-amber transition-colors duration-150 rounded-md">
             Onde estamos
           </a>
         </nav>
 
-        <div className="ml-auto flex items-center gap-3">
+        <div className="ml-auto flex items-center gap-2">
           <a
             href={contato.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden h-9 w-9 items-center justify-center text-text hover:text-amber md:inline-flex"
+            className="hidden h-10 w-10 items-center justify-center text-text/90 hover:text-amber hover:bg-surface-elevated rounded-full transition-all duration-150 md:inline-flex"
             aria-label="Instagram da UrbaBeer"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -59,13 +72,13 @@ export function Header() {
             href={contato.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden bg-amber px-4 py-2 text-sm font-bold text-black hover:bg-amber/90 md:inline-flex"
+            className="hidden btn btn-primary btn-sm md:inline-flex"
           >
             WhatsApp
           </a>
           <button
             type="button"
-            className="inline-flex h-9 w-9 items-center justify-center text-text md:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center text-text/90 hover:text-amber hover:bg-surface-elevated rounded-full transition-all duration-150 md:hidden"
             aria-expanded={aberto}
             aria-controls="menu-mobile"
             aria-label={aberto ? 'Fechar menu' : 'Abrir menu'}
@@ -79,25 +92,25 @@ export function Header() {
       </div>
 
       {aberto && (
-        <nav id="menu-mobile" className="border-t border-divider md:hidden" aria-label="Principal">
+        <nav id="menu-mobile" className="border-t border-divider bg-bg md:hidden animate-slide-down" aria-label="Navegação principal">
           <div className="container flex flex-col gap-1 py-3">
-            <a href="#promocoes" className="py-2 text-sm font-semibold text-text" onClick={() => setAberto(false)}>
+            <a href="#promocoes" className="px-3 py-2 text-sm font-semibold text-text/90 hover:text-amber hover:bg-surface-elevated rounded-md transition-colors duration-150" onClick={() => setAberto(false)}>
               Promoções
             </a>
-            <a href="#cardapio" className="py-2 text-sm font-semibold text-text" onClick={() => setAberto(false)}>
+            <a href="#cardapio" className="px-3 py-2 text-sm font-semibold text-text/90 hover:text-amber hover:bg-surface-elevated rounded-md transition-colors duration-150" onClick={() => setAberto(false)}>
               Cardápio
             </a>
-            <a href="#sobre" className="py-2 text-sm font-semibold text-text" onClick={() => setAberto(false)}>
+            <a href="#sobre" className="px-3 py-2 text-sm font-semibold text-text/90 hover:text-amber hover:bg-surface-elevated rounded-md transition-colors duration-150" onClick={() => setAberto(false)}>
               Sobre
             </a>
-            <a href="#onde" className="py-2 text-sm font-semibold text-text" onClick={() => setAberto(false)}>
+            <a href="#onde" className="px-3 py-2 text-sm font-semibold text-text/90 hover:text-amber hover:bg-surface-elevated rounded-md transition-colors duration-150" onClick={() => setAberto(false)}>
               Onde estamos
             </a>
             <a
               href={contato.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="py-2 text-sm font-semibold text-text"
+              className="px-3 py-2 text-sm font-semibold text-text/90 hover:text-amber hover:bg-surface-elevated rounded-md transition-colors duration-150"
             >
               Instagram
             </a>
@@ -105,7 +118,7 @@ export function Header() {
               href={contato.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-1 bg-amber px-4 py-2 text-center text-sm font-bold text-black"
+              className="mt-1 btn btn-primary btn-sm text-center"
             >
               WhatsApp
             </a>
