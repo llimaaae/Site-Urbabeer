@@ -1,75 +1,57 @@
-import { useState } from 'react'
-import { cardapio, categorias, type Categoria } from '../data/cardapio'
-import { DEMO } from '../data/config'
+import { cardapio } from '../data/cardapio'
 import { formatarPreco } from '../utils/preco'
 import { abrirWhatsApp } from '../utils/whatsapp'
-
-type Filtro = Categoria | 'Todas'
+import { CardContent } from '../components/ui/Card'
+import { Button } from '../components/ui/Button'
+import { Badge } from '../components/ui/Badge'
 
 export function Cardapio() {
-  const [filtro, setFiltro] = useState<Filtro>('Todas')
-
-  const lista = filtro === 'Todas' ? cardapio : cardapio.filter((i) => i.categoria === filtro)
+  const categorias = [...new Set(cardapio.map((item) => item.categoria))]
 
   return (
-    <section id="cardapio" className="border-t border-divider bg-bg py-16 md:py-24 lg:py-28" aria-labelledby="cardapio-title">
+    <section id="cardapio" className="border-t border-divider bg-alva-alt py-20 md:py-28 lg:py-32" aria-labelledby="cardapio-title">
       <div className="container">
-        <header className="animate-slide-up">
-          <h2 id="cardapio-title" className="font-display text-3xl md:text-4xl">Cardápio</h2>
-          {DEMO && (
-            <p className="mt-3 max-w-xl text-sm text-text-muted">
-              Preços e itens ilustrativos, apenas para demonstração do projeto.
-            </p>
-          )}
+        <header className="max-w-2xl animate-slide-up">
+          <h2 id="cardapio-title" className="font-display font-semibold text-3xl md:text-4xl">Cardápio completo</h2>
+          <p className="mt-3 max-w-xl text-text-muted">
+            {cardapio.length} itens. Valores referência. Consulte disponibilidade no WhatsApp.
+          </p>
         </header>
 
-        <div className="mt-8 flex flex-wrap gap-2" role="tablist" aria-label="Categorias do cardápio">
-          {(['Todas', ...categorias] as Filtro[]).map((c) => (
-            <button
-              key={c}
-              type="button"
-              role="tab"
-              aria-selected={filtro === c}
-              onClick={() => setFiltro(c)}
-              className={`btn transition-all duration-200 ${
-                filtro === c ? 'btn-primary' : 'btn-secondary'
-              }`}
-            >
-              {c}
-            </button>
-          ))}
-        </div>
+        <div className="mt-10 space-y-12" role="list">
+          {categorias.map((cat, catIndex) => {
+            const itens = cardapio.filter((i) => i.categoria === cat)
+            return (
+              <div key={cat} className="animate-slide-up" style={{ animationDelay: `${100 + catIndex * 100}ms` }}>
+                <h3 className="font-display text-xl md:text-2xl text-text mb-5 pb-3 border-b border-divider/50 flex items-center gap-3">
+                  <Badge variant="espresso" className="shrink-0">{cat}</Badge>
+                </h3>
 
-        <div className="mt-8 animate-fade-in" style={{ animationDelay: '100ms' }}>
-          <div className="rounded-2xl border border-divider bg-surface overflow-hidden shadow-md">
-            <ul className="divide-y divide-divider/50" role="list">
-              {lista.map((item, index) => (
-                <li
-                  key={`${item.categoria}-${item.nome}`}
-                  className="flex min-w-0 items-center gap-4 px-5 py-4 transition-all duration-200 hover:bg-bg-alt"
-                  style={{ animationDelay: `${index * 20}ms` }}
-                >
-                  <div className="min-w-0 grow">
-                    <p className="font-semibold text-text truncate">{item.nome}</p>
-                    <p className="text-xs text-text-muted">{item.categoria}</p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => abrirWhatsApp(`Olá! Gostaria de pedir: ${item.nome}`)}
-                    className="shrink-0 btn btn-ghost btn-sm font-display text-amber hover:bg-amber/10"
-                    aria-label={`Pedir ${item.nome} pelo WhatsApp`}
-                  >
-                    {formatarPreco(item.preco)}
-                  </button>
-                </li>
-              ))}
-              {lista.length === 0 && (
-                <li className="px-5 py-10 text-center text-text-muted">
-                  Nenhum item nesta categoria.
-                </li>
-              )}
-            </ul>
-          </div>
+                <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3" role="list">
+                  {itens.map((item, idx) => (
+                    <li key={item.nome} className="card group animate-slide-up" style={{ animationDelay: `${idx * 30}ms` }}>
+                      <CardContent className="p-5 flex flex-col h-full">
+                        <p className="font-display text-lg leading-tight text-text group-hover:text-primary transition-colors duration-200">{item.nome}</p>
+                        <p className="mt-1 text-xs uppercase tracking-wide text-text-muted">{item.categoria}</p>
+
+                        <div className="mt-auto flex items-center justify-between pt-3 border-t border-divider/30">
+                          <p className="font-display text-xl text-primary tabular-nums">{formatarPreco(item.preco)}</p>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => abrirWhatsApp(`Olá! Gostaria de pedir: ${item.nome} - ${formatarPreco(item.preco)}`)}
+                            aria-label={`Pedir ${item.nome} pelo WhatsApp`}
+                          >
+                            Pedir
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>

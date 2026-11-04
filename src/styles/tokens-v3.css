@@ -1,0 +1,238 @@
+/**
+ * UrbaBeer Design Tokens v3 — Nova Identidade Visual
+ * "Adega Contemporânea Brasileira" — Editorial, Quente, Profissional
+ * Inspirado em Café Aurora (Fraunces, Alva, leveza) + Trattoria Luna (terracota, calor, hierarquia)
+ * Paleta derivada EXCLUSIVAMENTE da família amber/brown atual — zero cores novas
+ */
+
+@theme {
+  /* ============================================================
+     CORES — SISTEMA 60/30/10
+     60% Claras/Neutras (Alva, Creams)
+     30% Primary Family (Caramelo, Terracota, Dourado)
+     10% Dark Accents (Espresso — apenas footer + 1 faixa)
+  ============================================================ */
+
+  /* --- BASES NEUTRAS (60%) --- */
+  --color-alva: #FDFBF7;           /* Fundo principal — quase branco quente */
+  --color-alva-alt: #F5EFE6;       /* Seções alternadas */
+  --color-cream-50:  #FDFBF7;
+  --color-cream-100: #F3EEE8;
+  --color-cream-200: #E8E2D9;      /* Divisores sutis */
+  --color-cream-300: #DCCCC0;      /* Bordas, inputs, hover */
+  --color-cream-400: #C9B8AC;      /* Divisores em fundo escuro */
+
+  /* --- PRIMARY FAMILY (30%) — Tons derivados do amber/brown original --- */
+  --color-caramelo: #B4761F;       /* Primary principal — CTAs, títulos de destaque */
+  --color-caramelo-hover: #9E661A;
+  --color-caramelo-light: #D4A574; /* Dourado Toscano — light accent */
+  --color-caramelo-muted: rgba(180, 118, 31, 0.12);  /* bg muted */
+  --color-caramelo-strong: #8B5E18;
+
+  --color-terracota: #C1502E;      /* Secondary accent — badges, tags, CTAs secundários */
+  --color-terracota-hover: #A34226;
+  --color-terracota-light: #D9896B;
+  --color-terracota-muted: rgba(193, 80, 46, 0.10);
+
+  /* --- DARK ACCENTS (10%) --- */
+  --color-espresso: #2E1F1A;       /* Texto principal, footer, faixa única escura */
+  --color-espresso-80: #3D2B23;    /* Texto secundário */
+  --color-espresso-60: #5C4436;    /* Texto muted */
+  --color-espresso-40: #8B7360;    /* Placeholders, ícones sutis */
+  --color-espresso-20: #C9B8AC;    /* Divisores em fundo escuro */
+  --color-espresso-10: #E5DFDB;    /* Bordas em fundo escuro */
+
+  /* --- SEMÂNTICOS --- */
+  --color-success: #6B7446;        /* Olive (aberto) */
+  --color-success-hover: #5A623A;
+  --color-success-muted: rgba(107, 116, 70, 0.12);
+
+  --color-danger: #B84236;         /* Fechado/erro */
+  --color-danger-hover: #9A362C;
+  --color-danger-muted: rgba(184, 66, 54, 0.12);
+
+  /* --- ROLES SEMÂNTICAS (para componentes) --- */
+  --color-primary: var(--color-caramelo);
+  --color-primary-hover: var(--color-caramelo-hover);
+  --color-primary-muted: var(--color-caramelo-muted);
+  --color-primary-strong: var(--color-caramelo-strong);
+
+  --color-secondary: var(--color-terracota);
+  --color-secondary-hover: var(--color-terracota-hover);
+  --color-secondary-muted: var(--color-terracota-muted);
+
+  --color-surface: var(--color-alva);
+  --color-surface-alt: var(--color-alva-alt);
+  --color-surface-elevated: #FFFFFF;
+
+  --color-bg: var(--color-alva);
+  --color-bg-alt: var(--color-alva-alt);
+
+  --color-text: var(--color-espresso);
+  --color-text-secondary: var(--color-espresso-80);
+  --color-text-muted: var(--color-espresso-60);
+  --color-text-subtle: var(--color-espresso-40);
+
+  --color-divider: var(--color-cream-200);
+  --color-divider-strong: var(--color-cream-300);
+  --color-divider-dark: var(--color-espresso-20);
+
+  --color-focus: var(--color-caramelo);
+  --color-focus-ring: var(--color-caramelo-muted);
+
+  /* ============================================================
+     TIPOGRAFIA
+     Display: Fraunces (serifada expressiva, variable, "wonk")
+     Corpo: DM Sans (geométrica amigável, variable)
+  ============================================================ */
+  --font-display: 'Fraunces', serif;
+  --font-sans: 'DM Sans', sans-serif;
+
+  /* Escala fluida (clamp) */
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.875rem;    /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg: 1.125rem;    /* 18px */
+  --text-xl: 1.25rem;     /* 20px */
+  --text-2xl: 1.5rem;     /* 24px */
+  --text-3xl: 1.875rem;   /* 30px */
+  --text-4xl: 2.25rem;    /* 36px */
+  --text-5xl: 3rem;       /* 48px */
+  --text-6xl: 3.75rem;    /* 60px */
+  --text-7xl: 4.5rem;     /* 72px */
+
+  --leading-tight: 1.05;
+  --leading-snug: 1.2;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.02em;
+  --tracking-wider: 0.04em;
+  --tracking-widest: 0.1em;
+
+  /* ============================================================
+     ESPAÇAMENTO (escala 4px + ritmo áureo para seções)
+  ============================================================ */
+  --space-0: 0;
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  --space-32: 8rem;     /* 128px — hero, seções heroicas */
+
+  /* ============================================================
+     RAIOS ORGÂNICOS
+  ============================================================ */
+  --radius-sm: 0.5rem;      /* 8px — badges, pills */
+  --radius-md: 0.875rem;    /* 14px — botões, inputs */
+  --radius-lg: 1.25rem;     /* 20px — cards padrão */
+  --radius-xl: 1.75rem;     /* 28px — cards hero, modais */
+  --radius-2xl: 2.5rem;     /* 40px — containers grandes, imagens hero */
+  --radius-full: 9999px;
+
+  /* ============================================================
+     SOMBRAS "LUZ DE VELA" — Quentes, difusas, em camadas
+  ============================================================ */
+  --shadow-xs: 0 1px 2px 0 rgb(46 31 26 / 0.03);
+  --shadow-sm: 0 2px 4px -1px rgb(46 31 26 / 0.04), 0 1px 2px -1px rgb(46 31 26 / 0.03);
+  --shadow-md: 0 6px 12px -2px rgb(46 31 26 / 0.05), 0 3px 6px -2px rgb(46 31 26 / 0.04);
+  --shadow-lg: 0 16px 32px -4px rgb(46 31 26 / 0.06), 0 6px 12px -4px rgb(46 31 26 / 0.05);
+  --shadow-xl: 0 24px 48px -8px rgb(46 31 26 / 0.08), 0 12px 24px -8px rgb(46 31 26 / 0.06);
+  --shadow-2xl: 0 40px 80px -16px rgb(46 31 26 / 0.1);
+
+  /* Card shadows */
+  --shadow-card: var(--shadow-md);
+  --shadow-card-hover: var(--shadow-xl);
+  --shadow-elevated: var(--shadow-lg);
+
+  /* ============================================================
+     TRANSIÇÕES & MOTION
+  ============================================================ */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 350ms;
+  --duration-slower: 500ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ============================================================
+     Z-INDEX
+  ============================================================ */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal-backdrop: 400;
+  --z-modal: 500;
+  --z-popover: 600;
+  --z-tooltip: 700;
+
+  /* ============================================================
+     BREAKPOINTS & CONTAINER
+  ============================================================ */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  --container-max: 1280px;
+  --container-pad: 1.5rem;      /* mobile */
+  --container-pad-md: 2.5rem;   /* tablet */
+  --container-pad-lg: 4rem;     /* desktop */
+}
+
+/* CSS Custom Properties para acesso direto (fallback) */
+:root {
+  --color-alva: #FDFBF7;
+  --color-alva-alt: #F5EFE6;
+  --color-cream-50: #FDFBF7;
+  --color-cream-100: #F3EEE8;
+  --color-cream-200: #E8E2D9;
+  --color-cream-300: #DCCCC0;
+  --color-cream-400: #C9B8AC;
+
+  --color-caramelo: #B4761F;
+  --color-caramelo-hover: #9E661A;
+  --color-caramelo-light: #D4A574;
+  --color-caramelo-muted: rgba(180, 118, 31, 0.12);
+  --color-caramelo-strong: #8B5E18;
+
+  --color-terracota: #C1502E;
+  --color-terracota-hover: #A34226;
+  --color-terracota-light: #D9896B;
+  --color-terracota-muted: rgba(193, 80, 46, 0.10);
+
+  --color-espresso: #2E1F1A;
+  --color-espresso-80: #3D2B23;
+  --color-espresso-60: #5C4436;
+  --color-espresso-40: #8B7360;
+  --color-espresso-20: #C9B8AC;
+  --color-espresso-10: #E5DFDB;
+
+  --color-success: #6B7446;
+  --color-success-hover: #5A623A;
+  --color-success-muted: rgba(107, 116, 70, 0.12);
+
+  --color-danger: #B84236;
+  --color-danger-hover: #9A362C;
+  --color-danger-muted: rgba(184, 66, 54, 0.12);
+
+  --font-display: 'Fraunces', serif;
+  --font-sans: 'DM Sans', sans-serif;
+
+  --container-max: 1280px;
+  --container-pad: 1.5rem;
+  --container-pad-md: 2.5rem;
+  --container-pad-lg: 4rem;
+}
